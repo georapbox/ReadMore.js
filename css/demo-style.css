@@ -41,6 +41,11 @@ h2.main_title{
 	padding: 25px 0 15px 0;
 	color: #0095DD;
 }
+h3{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.33em;
+	font-weight: 400;
+}
 ul li{
 	font-size: 1.17em;
 	margin: 0 0 0 15px;
