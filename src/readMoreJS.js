@@ -86,7 +86,7 @@
 				
 				moreContainer = doc.createElement('div');                                                 // Create a div element to hold the More/Less link.
 				if(options.containerClass) {
-					moreContainer.classList.add(options.containerClass);
+					moreContainer.className = options.containerClass;
 				}
 
 				moreContainer.innerHTML = '<a id="rm-more_'+ i + '"'                                               // Create the More/Less link.
