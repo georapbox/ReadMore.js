@@ -1,7 +1,7 @@
 /**
 * @app ReadMoreJS
 * @desc Breaks the content of an element to the specified number of words
-* @version 1.0.0
+* @version 1.1.0
 * @license The MIT License (MIT)
 * @author George Raptis | http://georap.gr 
 */
@@ -55,7 +55,9 @@
 			numOfWords: 50,
 			toggle: true,
 			moreLink: 'read more...',
-			lessLink: 'read less'
+			lessLink: 'read less',
+			linkClass: 'rm-link', 
+			containerClass: false 
 		};
 		options = RM.helpers.extendObj({}, defaults, options);
 
@@ -83,17 +85,20 @@
 				target[i].innerHTML = trimmedArr[i];                                                      // Populate the target element with the trimmed version of text.
 				
 				moreContainer = doc.createElement('div');                                                 // Create a div element to hold the More/Less link.
-				moreContainer.innerHTML = '<a id="rm-more_'                                               // Create the More/Less link.
-					+ i
-					+ '" class="rm-link" style="cursor:pointer;">'
+				if(options.containerClass) {
+					moreContainer.className = options.containerClass;
+				}
+
+				moreContainer.innerHTML = '<a id="rm-more_'+ i + '"'                                               // Create the More/Less link.
+					+ ' class="'+ options.linkClass +'"'
+					+ ' style="cursor:pointer;" data-readmore="anchor">'
 					+ options.moreLink
 					+ '</a>';
 				target[i].parentNode.insertBefore(moreContainer, target[i].nextSibling);                  // Insert the More/Less link after the target element.
 			}
 		}
 
-		rmLink = doc.querySelectorAll('.rm-link');                                                        // Reference the More/Less link.
-		
+		rmLink = doc.querySelectorAll('[data-readmore="anchor"]');                                                        // Reference the More/Less link.
 		// Loop through all links and attach event listeners.
 		for (j = 0, l = rmLink.length; j < l; j++) {
 			rmLink[j].onclick = function () {
