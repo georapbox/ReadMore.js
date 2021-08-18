@@ -1,13 +1,15 @@
-/**
-* @app ReadMoreJS
-* @desc Breaks the content of an element to the specified number of words
-* @version 1.1.0
-* @license The MIT License (MIT)
-* @author George Raptis | http://georap.gr 
-*/
+/*!
+ * ReadMoreJS
+ * Breaks the content of an element to the specified number of words
+ *
+ * @version 1.1.1
+ * @author George Raptis (georapbox@gmail.com)
+ * @repository https://github.com/georapbox/ReadMore.js.git
+ * @license MIT
+ */
 ;(function (win, doc, undef) {
 	'use strict';
-	
+
 	/**
 	 * @desc this object holds all functions
 	*/
@@ -56,8 +58,8 @@
 			toggle: true,
 			moreLink: 'read more...',
 			lessLink: 'read less',
-			linkClass: 'rm-link', 
-			containerClass: false 
+			linkClass: 'rm-link',
+			containerClass: false
 		};
 		options = RM.helpers.extendObj({}, defaults, options);
 
@@ -70,7 +72,7 @@
 			trimmedArr = [],                                                                              // Array to hold the final (trimmed) text of each target element.
 			i, j, l, moreContainer, rmLink, moreLinkID, index;
 
-		// Loop through all target elements	
+		// Loop through all target elements
 		for (i = 0; i < targetLen; i++) {
 			targetContent = target[i].innerHTML;                                                          // Get the initial text of each target element.
 			trimmedTargetContent = RM.generateTrimmed(targetContent, options.numOfWords);                 // Generate the trimmed version of the initial text.
@@ -83,7 +85,7 @@
 			// is smaller than the number of words the target element has.
 			if (options.numOfWords < targetContentWords - 1) {
 				target[i].innerHTML = trimmedArr[i];                                                      // Populate the target element with the trimmed version of text.
-				
+
 				moreContainer = doc.createElement('div');                                                 // Create a div element to hold the More/Less link.
 				if(options.containerClass) {
 					moreContainer.className = options.containerClass;
@@ -101,10 +103,11 @@
 		rmLink = doc.querySelectorAll('[data-readmore="anchor"]');                                                        // Reference the More/Less link.
 		// Loop through all links and attach event listeners.
 		for (j = 0, l = rmLink.length; j < l; j++) {
-			rmLink[j].onclick = function () {
+			rmLink[j].onclick = function (e) {
+				e.preventDefault();
 				moreLinkID = this.getAttribute('id');                                                     // Get each link's unique identifier.
 				index = moreLinkID.split('_')[1];                                                         // Extract index number from each link's 'id'.
-				
+
 				// if (!helpers.classList.contains(this, 'less')) {
 				if (this.getAttribute('data-clicked') !== 'true') {
 					target[index].innerHTML = initArr[index];
