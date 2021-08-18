@@ -1,0 +1,25 @@
+{
+  "name": "read-more.js",
+  "version": "1.2.0",
+  "description": "JavaScript library that adds a 'read more' functionality on the text blocks that is applied to.",
+  "main": "lib/read-more.js",
+  "scripts": {
+    "lint": "eslint src/**/*.js",
+    "build": "uglifyjs src/read-more.js --comments --output dist/read-more.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georapbox/ReadMore.js.git"
+  },
+  "keywords": [],
+  "author": "George Raptis <georapbox@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georapbox/ReadMore.js/issues"
+  },
+  "homepage": "https://github.com/georapbox/ReadMore.js#readme",
+  "devDependencies": {
+    "eslint": "~7.32.0",
+    "uglify-js": "~3.14.1"
+  }
+}
