@@ -44,6 +44,10 @@ var destroy = $readMoreJS.init({
 destroy();
 ```
 
+## Changelog
+
+For API updates and breaking changes, check the [CHANGELOG](https://github.com/georapbox/ReadMore.js/blob/master/CHANGELOG.md).
+
 ## License
 
 [The MIT License (MIT)](https://georapbox.mit-license.org/@2014)
