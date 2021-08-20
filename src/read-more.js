@@ -18,6 +18,8 @@
 }('$readMoreJS', this, function () {
   'use strict';
 
+  var linkDataIdPrefix = 'read-more-link_';
+
   function extend() {
     for (var i = 1, l = arguments.length; i < l; i++) {
       for (var key in arguments[i]) {
@@ -49,7 +51,7 @@
       toggle: true,
       moreLink: 'Read more',
       lessLink: 'Read less',
-      linkClass: 'rm-link'
+      linkClass: ''
     };
 
     options = extend({}, defaults, options);
@@ -63,7 +65,7 @@
       evt.preventDefault();
 
       var linkEl = evt.currentTarget;
-      var linkId = linkEl.getAttribute('id');
+      var linkId = linkEl.getAttribute('data-id');
       var index = linkId.split('_')[1];
 
       if (linkEl.getAttribute('data-clicked') !== 'true') {
@@ -93,14 +95,16 @@
 
       // Procceed only if the number of words specified by the user is smaller than the number of words the target element has.
       if (options.wordsCount < targetContentWords - 1) {
-        targets[i].innerHTML = trimmedArr[i] + '<a href="#" data-readmore="anchor" data-clicked="false" id="rm-more_' + i + '"'
-          + ' class="' + options.linkClass + '">'
+        targets[i].innerHTML = trimmedArr[i] + '<a href="#" data-clicked="false" data-id="' + linkDataIdPrefix + i + '"'
+          + (options.linkClass ? ' class="' + options.linkClass + '"' : '') + '>'
           + options.moreLink
           + '</a>';
       }
     }
 
-    rmLinks = document.querySelectorAll('[data-readmore="anchor"]');
+    rmLinks = document.querySelectorAll('[data-id^="' + linkDataIdPrefix + '"]');
+
+    console.log(rmLinks);
 
     for (j = 0; j < rmLinks.length; j++) {
       rmLinks[j].addEventListener('click', onMoreAnchorClicked);
