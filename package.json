@@ -1,7 +1,7 @@
 {
   "name": "read-more.js",
   "version": "2.0.0",
-  "description": "JavaScript library that adds a 'read more' functionality on the text blocks that is applied to.",
+  "description": "JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.",
   "main": "lib/read-more.js",
   "scripts": {
     "lint": "eslint src/**/*.js",

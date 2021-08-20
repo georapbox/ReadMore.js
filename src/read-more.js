@@ -1,6 +1,6 @@
 /*!
  * ReadMore.js
- * JavaScript library that adds a 'read more' functionality on the text blocks that is applied to.
+ * JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.
  *
  * @version 2.0.0
  * @author George Raptis <georapbox@gmail.com>
@@ -15,7 +15,7 @@
   } else {
     context[name] = definition(name, context);
   }
-}('$ReadMoreJS', this, function () {
+}('$readMoreJS', this, function () {
   'use strict';
 
   function extend() {
@@ -47,8 +47,8 @@
       target: '',
       wordsCount: 50,
       toggle: true,
-      moreLink: 'read more',
-      lessLink: 'read less',
+      moreLink: 'Read more',
+      lessLink: 'Read less',
       linkClass: 'rm-link'
     };
 
