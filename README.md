@@ -2,46 +2,33 @@
 
 JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.
 
-## Usage example
-
-#### HTML
-
-```html
-<div class="section">
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, vel fuga rerum asperiores quos qui exercitationem et expedita libero corrupti. Placeat tempore aspernatur sapiente non consectetur labore corporis ipsum iste.
-  </p>
-</div>
-
-<div class="section">
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, voluptatem obcaecati at praesentium sunt voluptatum dolorum. Consequatur, fugiat optio itaque nihil quibusdam repellendus mollitia assumenda placeat debitis reiciendis vel perspiciatis!
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, autem, eos, fugit, id commodi vel aliquam dolorum placeat magnam repudiandae ratione quidem omnis at earum dolores consequuntur molestias! Veritatis, ipsam!
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, quam tempora fuga accusantium illum eum iure veritatis doloremque incidunt. Dolor, placeat, veritatis facilis culpa error asperiores ipsam repellat aliquid numquam.
-  </p>
-</div>
-```
-
-#### JS
+## API & Usage
 
 ```js
+// Initialise
 var destroy = $readMoreJS({
-   target: '.section p',          // Selector of the element the plugin applies to (any CSS selector, eg: '#', '.'). Default: ''
-   wordsCount: 50,                // Number of words to initially display (any number). Default: 50
-   toggle: true,                  // If true, user can toggle between 'Read more' and 'Read less'. Default: true
-   moreLink: 'Read more',         // The text of 'Read more' link. Default: 'Read more'
-   lessLink: 'Read less',         // The text of 'Read less' link. Default: 'Read less'
-   linkClass: 'rm-link'           // The class given to the 'Read more/less' link. Defaul: 'rm-link'
+   target: '.container p',
+   wordsCount: 50,
+   toggle: true,
+   moreLink: 'Read more',
+   lessLink: 'Read less',
+   linkClass: 'rm-link-classname'
 });
 
 // Bring back to initial state if no longer needed.
 destroy();
 ```
+
+### Options
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| target | <code>String</code> | "" | CSS selector of the HTMLElement that contains the text content to be truncated (any CSS selector, eg: "#", "."). |
+| wordsCount | <code>Number</code> | 50 | The number of words to display before the "Read more" link. Has no effect if the number provided is greater than the actual words number. |
+| toggle | <code>Boolean</code> | true | If `true`, the user can toggle between "Read more" and "Read less", otherwise when they click once on "Read more" link, they will not be able to display less content again. |
+| moreLink | <code>String</code> | "Read more" | The text of "Read more" link. HTML strings are supported, eg `<div>Read more</div>`. |
+| lessLink | <code>String</code> | "Read more" | The text of "Read less" link. HTML strings are supported, eg `<div>Read less</div>`. |
+| linkClass | <code>String</code> | "" | A class name that is applied on the "Read more/less" link, mostly for styling purposes. |
 
 ## Changelog
 
