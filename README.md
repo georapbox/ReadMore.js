@@ -1,6 +1,6 @@
 # ReadMore.js
 
-JavaScript library that adds a 'read more' functionality on the text blocks that is applied to.
+JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.
 
 ## Usage example
 
@@ -30,14 +30,13 @@ JavaScript library that adds a 'read more' functionality on the text blocks that
 #### JS
 
 ```js
-var destroy = $readMoreJS.init({
+var destroy = $readMoreJS({
    target: '.section p',          // Selector of the element the plugin applies to (any CSS selector, eg: '#', '.'). Default: ''
-   numOfWords: 50,                // Number of words to initially display (any number). Default: 50
-   toggle: true,                  // If true, user can toggle between 'read more' and 'read less'. Default: true
-   moreLink: 'read more ...',     // The text of 'Read more' link. Default: 'read more ...'
-   lessLink: 'read less',         // The text of 'Read less' link. Default: 'read less'
-   linkClass: 'rm-link',          // The class given to the read more link. Defaul: 'rm-link'
-   containerClass: 'rm-container' // The class given to the div container of the read more link. Default: ''
+   wordsCount: 50,                // Number of words to initially display (any number). Default: 50
+   toggle: true,                  // If true, user can toggle between 'Read more' and 'Read less'. Default: true
+   moreLink: 'Read more',         // The text of 'Read more' link. Default: 'Read more'
+   lessLink: 'Read less',         // The text of 'Read less' link. Default: 'Read less'
+   linkClass: 'rm-link'           // The class given to the 'Read more/less' link. Defaul: 'rm-link'
 });
 
 // Bring back to initial state if no longer needed.
