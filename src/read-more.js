@@ -143,23 +143,18 @@
       initialContent = trim(targets[i].innerHTML);
 
       if (options.wordsCount) {
-        truncatedContent = truncateByWordsCount(initialContent, options.wordsCount, '... ');
+        truncatedContent = truncateByWordsCount(initialContent, options.wordsCount, '...');
       } else if (options.charactersCount) {
-        truncatedContent = truncateByCharactersCount(initialContent, options.charactersCount, '... ');
+        truncatedContent = truncateByCharactersCount(initialContent, options.charactersCount, '...');
       }
 
       initialArray.push(initialContent);
       truncatedArray.push(truncatedContent);
 
-      // Procceed only if the number of words specified by the user is smaller than the number of words the target element has.
-      if (options.wordsCount) {
-        if (options.wordsCount <= getWords(initialContent).length) {
-          targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
-        }
-      } else if (options.charactersCount) {
-        if (options.charactersCount < initialContent.length) {
-          targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
-        }
+      if (options.wordsCount && options.wordsCount < getWords(initialContent).length) {
+        targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
+      } else if (options.charactersCount && options.charactersCount < initialContent.length) {
+        targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
       }
     }
 
