@@ -2,7 +2,7 @@
  * ReadMore.js
  * JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.
  *
- * @version 2.0.0
+ * @version 3.0.0
  * @author George Raptis <georapbox@gmail.com>
  * @repository https://github.com/georapbox/ReadMore.js.git
  * @license MIT
@@ -36,18 +36,71 @@
     return arguments[0];
   }
 
-  function countWords(str) {
-    return str.split(/\s+/).length;
+  function getWords(subjectString) {
+    if (typeof subjectString !== 'string') {
+      return [];
+    }
+
+    return subjectString.split(/\s+/).filter(Boolean);
   }
 
-  function generateTrimmed(str, wordsNum) {
-    return str.split(/\s+/).slice(0, wordsNum).join(' ') + '... ';
+  function truncateByWordsCount(subjectString, wordsCount, suffix) {
+    var words = getWords(subjectString);
+
+    wordsCount = Math.floor(wordsCount);
+
+    if (wordsCount > words.length || wordsCount < 0 || isNaN(wordsCount)) {
+      return subjectString;
+    }
+
+    return words.slice(0, wordsCount).join(' ') + (suffix || '');
+  }
+
+  function truncateByCharactersCount(subjectString, characterCount, suffix) {
+    var regex, truncated;
+
+    characterCount = Math.floor(characterCount);
+
+    if (characterCount > subjectString.length || characterCount < 0 || isNaN(characterCount)) {
+      return subjectString;
+    }
+
+    regex = new RegExp('^.{0,' + characterCount + '}[S]*', 'g');
+    truncated = subjectString.match(regex);
+    suffix = suffix || '';
+    truncated = truncated[0].replace(/\s$/, '');
+    truncated = truncated + suffix;
+
+    return truncated;
+  }
+
+  function trim(subjectString) {
+    return String.prototype.trim
+      ? subjectString.trim()
+      : subjectString.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  }
+
+  function isNaN(value) {
+    if (Number.isNaN) {
+      return Number.isNaN(value);
+    }
+
+    // NaN is of type "number" and it is also the only primitive value which does not equal itself.
+    return typeof value === 'number' && value !== value;
+  }
+
+  function printLink(index, linkClass, moreLink) {
+    return '<a href="#" data-clicked="false" data-id="' + linkDataIdPrefix + index + '"'
+      + (linkClass ? ' class="' + linkClass + '"' : '') + '>'
+      + moreLink
+      + '</a>';
   }
 
   function init(options) {
     var defaults = {
       target: '',
-      wordsCount: 50,
+      wordsCount: void 0,
+      charactersCount: void 0,
       toggle: true,
       moreLink: 'Read more',
       lessLink: 'Read less',
@@ -57,9 +110,9 @@
     options = extend({}, defaults, options);
 
     var targets = document.querySelectorAll(options.target);
-    var initArr = [];
-    var trimmedArr = [];
-    var targetContent, trimmedTargetContent, targetContentWords, i, j, rmLinks;
+    var initialArray = [];
+    var truncatedArray = [];
+    var initialContent, truncatedContent, i, j, rmLinks;
 
     function onMoreAnchorClicked(evt) {
       evt.preventDefault();
@@ -69,7 +122,7 @@
       var index = linkId.split('_')[1];
 
       if (linkEl.getAttribute('data-clicked') !== 'true') {
-        targets[index].innerHTML = initArr[index];
+        targets[index].innerHTML = initialArray[index];
 
         if (options.toggle) {
           linkEl.innerHTML = options.lessLink;
@@ -79,7 +132,7 @@
           linkEl.removeEventListener('click', onMoreAnchorClicked);
         }
       } else {
-        targets[index].innerHTML = trimmedArr[index];
+        targets[index].innerHTML = truncatedArray[index];
         targets[index].appendChild(linkEl);
         linkEl.innerHTML = options.moreLink;
         linkEl.setAttribute('data-clicked', false);
@@ -87,24 +140,30 @@
     }
 
     for (i = 0; i < targets.length; i++) {
-      targetContent = targets[i].innerHTML;
-      trimmedTargetContent = generateTrimmed(targetContent, options.wordsCount);
-      targetContentWords = countWords(targetContent);
-      initArr.push(targetContent);
-      trimmedArr.push(trimmedTargetContent);
+      initialContent = trim(targets[i].innerHTML);
+
+      if (options.wordsCount) {
+        truncatedContent = truncateByWordsCount(initialContent, options.wordsCount, '... ');
+      } else if (options.charactersCount) {
+        truncatedContent = truncateByCharactersCount(initialContent, options.charactersCount, '... ');
+      }
+
+      initialArray.push(initialContent);
+      truncatedArray.push(truncatedContent);
 
       // Procceed only if the number of words specified by the user is smaller than the number of words the target element has.
-      if (options.wordsCount < targetContentWords - 1) {
-        targets[i].innerHTML = trimmedArr[i] + '<a href="#" data-clicked="false" data-id="' + linkDataIdPrefix + i + '"'
-          + (options.linkClass ? ' class="' + options.linkClass + '"' : '') + '>'
-          + options.moreLink
-          + '</a>';
+      if (options.wordsCount) {
+        if (options.wordsCount <= getWords(initialContent).length) {
+          targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
+        }
+      } else if (options.charactersCount) {
+        if (options.charactersCount < initialContent.length) {
+          targets[i].innerHTML = truncatedArray[i] + printLink(i, options.linkClass, options.moreLink);
+        }
       }
     }
 
     rmLinks = document.querySelectorAll('[data-id^="' + linkDataIdPrefix + '"]');
-
-    console.log(rmLinks);
 
     for (j = 0; j < rmLinks.length; j++) {
       rmLinks[j].addEventListener('click', onMoreAnchorClicked);
@@ -116,7 +175,7 @@
       }
 
       for (i = 0; i < targets.length; i++) {
-        targets[i].innerHTML = initArr[i];
+        targets[i].innerHTML = initialArray[i];
       }
     };
   }
