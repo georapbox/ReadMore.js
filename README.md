@@ -24,14 +24,14 @@ destroy();
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | target | <code>String</code> | "" | CSS selector of the HTMLElement that contains the text content to be truncated (any CSS selector, eg: "#", "."). |
-| wordsCount<sup>1</sup> | <code>Number</code> | `undefined` | The number of words to display before the "Read more" link. Has no effect if the number provided is greater than the actual words number. |
-| charactersCount<sup>1</sup> | <code>Number</code> | `undefined` | The number of characters to display before the "Read more" link. Has no effect if the number provided is greater than the actual characters number. |
+| wordsCount<sup>1</sup> | <code>Number</code> | `undefined` | The number of words to display before the "Read more" link. Has no effect if the number provided is greater than the actual words length. |
+| charactersCount<sup>1</sup> | <code>Number</code> | `undefined` | The number of characters to display before the "Read more" link. Has no effect if the number provided is greater than the actual characters length. |
 | toggle | <code>Boolean</code> | true | If `true`, the user can toggle between "Read more" and "Read less", otherwise when they click once on "Read more" link, they will not be able to display less content again. |
 | moreLink | <code>String</code> | "Read more" | The text of "Read more" link. HTML strings are supported, eg `<div>Read more</div>`. |
-| lessLink | <code>String</code> | "Read more" | The text of "Read less" link. HTML strings are supported, eg `<div>Read less</div>`. |
+| lessLink | <code>String</code> | "Read less" | The text of "Read less" link. HTML strings are supported, eg `<div>Read less</div>`. |
 | linkClass | <code>String</code> | "" | A class name that is applied on the "Read more/less" link, mostly for styling purposes. |
 
-<sup>1</sup> If both options `wordsCount` and `charactersCount` are used at the same time, the `wordsCount` option take precedencea and the `charactersCount` is just ignored. USe only one of the options for more predictable behaviour.
+<sup>1</sup> If both options `wordsCount` and `charactersCount` are used at the same time, the `wordsCount` option takes precedence and the `charactersCount` is just ignored. Use only one of the options for more predictable behaviour.
 
 ## Changelog
 
