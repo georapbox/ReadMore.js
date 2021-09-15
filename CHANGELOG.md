@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v3.0.0 - 2021-09-06
+## v3.0.0 - 2021-09-15
 ### Breaking changes
 - `wordsCount` does not longer hold a default value of `50`. You now need to explicitely provide a number greater than `0`.
 

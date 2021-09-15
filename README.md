@@ -8,7 +8,7 @@ JavaScript library that adds a 'Read more/less' functionality on the text blocks
 // Initialise
 var destroy = $readMoreJS({
    target: '.container p',
-   wordsCount: 50,
+   wordsCount: 50, // Alternatively use `charactersCount` if you wish to truncate by characters' length.
    toggle: true,
    moreLink: 'Read more',
    lessLink: 'Read less',
