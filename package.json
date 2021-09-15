@@ -1,6 +1,6 @@
 {
   "name": "read-more.js",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "JavaScript library that adds a 'Read more/less' functionality on the text blocks that is applied to.",
   "main": "lib/read-more.js",
   "scripts": {
